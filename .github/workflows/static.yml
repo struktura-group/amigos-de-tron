@@ -7,9 +7,9 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: write  # Necesario para Checkout
-  pages: write     # CRÍTICO: Permite publicar en Pages
-  id-token: write  # Necesario para autenticación
+  contents: write
+  pages: write
+  id-token: write
 
 concurrency:
   group: "pages"
@@ -28,30 +28,31 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }} 
       
-      # 2. Configuración de Node.js
+      # 2. Configuración de Node.js (FIX: Especificar npm y cache)
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20' # Usar una versión LTS estable
-          cache: 'npm'
+          node-version: '20' 
+          cache: 'npm' # Asegura que se use npm y busque package-lock.json
+          # cache-dependency-path: 'package.json' # Podría ser necesario si package.json no está en la raíz
       
-      # 3. Instalación de dependencias y Build (Compilación)
+      # 3. Instalación de dependencias y Build (CRÍTICO)
+      # Usamos npm ci si package-lock.json existe, si no, npm install
       - name: Install dependencies and Build
         run: |
-          npm install
-          npm run build # <-- ESTO CREA LA CARPETA 'dist' CON index.html
-
+          npm install # <--- ESTO CREARÁ package-lock.json si no existe
+          npm run build # <-- Crea la carpeta 'dist'
+          
       # 4. Setup Pages (Habilitar Pages)
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
           enablement: true 
 
-      # 5. Upload artifact (CRÍTICO: Apunta a la carpeta 'dist')
+      # 5. Upload artifact (Apunta a la carpeta 'dist')
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # VITE coloca el index.html final y los assets dentro de 'dist'
           path: './dist' 
           
       # 6. Deploy to GitHub Pages
