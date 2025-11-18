@@ -1,4 +1,3 @@
-# Añadir permisos de pages
 # Simple workflow for deploying static content to GitHub Pages
 name: Deploy static content to Pages
 
@@ -30,8 +29,10 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: Checkout (FIX: FORZAR TOKEN) # <--- AQUI ESTÁ EL CAMBIO CRÍTICO
         uses: actions/checkout@v4
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }} # <--- ESTO RESUELVE EL ERROR 128
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
