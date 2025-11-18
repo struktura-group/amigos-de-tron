@@ -22,38 +22,40 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      # 1. Checkout (Autenticación Corregida)
+      # 1. Checkout
       - name: Checkout Code
         uses: actions/checkout@v4
         with:
           token: ${{ secrets.GITHUB_TOKEN }} 
       
-      # 2. Configuración de Node.js (FIX: Especificar npm y cache)
+      # 2. Configuración de Node.js
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20' 
-          cache: 'npm' # Asegura que se use npm y busque package-lock.json
-          # cache-dependency-path: 'package.json' # Podría ser necesario si package.json no está en la raíz
+          # FIX CRÍTICO: Indica a setup-node dónde está package.json
+          cache-dependency-path: 'shadcn-ui/package.json' 
       
-      # 3. Instalación de dependencias y Build (CRÍTICO)
-      # Usamos npm ci si package-lock.json existe, si no, npm install
+      # 3. Instalación de dependencias y Build (CRÍTICO: Cambia de Directorio)
       - name: Install dependencies and Build
         run: |
-          npm install # <--- ESTO CREARÁ package-lock.json si no existe
-          npm run build # <-- Crea la carpeta 'dist'
+          # Navega a la carpeta donde está package.json
+          cd shadcn-ui 
+          npm install 
+          npm run build # <-- Esto crea la carpeta 'dist' dentro de shadcn-ui
           
-      # 4. Setup Pages (Habilitar Pages)
+      # 4. Setup Pages
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
           enablement: true 
 
-      # 5. Upload artifact (Apunta a la carpeta 'dist')
+      # 5. Upload artifact (FIX CRÍTICO: Apunta a la carpeta 'dist' DENTRO de shadcn-ui)
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: './dist' 
+          # La carpeta 'dist' se crea en shadcn-ui
+          path: './shadcn-ui/dist' 
           
       # 6. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
