@@ -29,21 +29,21 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout (Autenticación Corregida)
+      - name: Checkout - FINAL
         uses: actions/checkout@v4
         with:
           # SOLUCIÓN DE AUTENTICACIÓN
           token: ${{ secrets.GITHUB_TOKEN }} 
-      - name: Setup Pages (FIX: Habilitar Pages) 
+      - name: Setup Pages - FINAL
         uses: actions/configure-pages@v5
         with:
-          # SOLUCIÓN DE PERMISOS: Fuerza la creación del sitio
+          # SOLUCIÓN DE PERMISOS (Not Found)
           enablement: true 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # Upload entire repository
-          path: '.'  # <-- ESTA LÍNEA DEBE TENER 10 ESPACIOS DE INDENTACIÓN (después del guion inicial)
+          # CUIDADO CON LA INDENTACIÓN (RESUELVE ERROR 37)
+          path: '.'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
