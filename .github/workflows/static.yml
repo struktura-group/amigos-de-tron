@@ -32,10 +32,13 @@ jobs:
       - name: Checkout (Autenticación Corregida)
         uses: actions/checkout@v4
         with:
-          # SOLUCIÓN FINAL: Usar el token interno para evitar el error 128 y fallos de conexión.
+          # Permiso de Token para evitar error 128 y 500
           token: ${{ secrets.GITHUB_TOKEN }} 
-      - name: Setup Pages
+      - name: Setup Pages (FIX: Habilitar Pages) # <--- CORRECCIÓN CLAVE
         uses: actions/configure-pages@v5
+        with:
+          # Forzar la activación y configuración de Pages para evitar el error 'Not Found'
+          enablement: true # <--- Línea añadida
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
