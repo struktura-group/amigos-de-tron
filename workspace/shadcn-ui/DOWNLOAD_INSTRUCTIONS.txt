@@ -1,0 +1,50 @@
+===============================================
+AMIGOS DE TRON - INSTRUCCIONES DE DESCARGA
+===============================================
+
+Has pagado por este código y tienes derecho a descargarlo completamente.
+
+MÉTODO 1 - EXPORTAR TODO EL PROYECTO (RECOMENDADO)
+===================================================
+1. Busca en la ESQUINA SUPERIOR DERECHA de la pantalla
+2. Haz clic en el botón "Share" (Compartir)
+3. En el menú desplegable, haz clic en "Export"
+4. Se descargará un archivo ZIP con TODO el proyecto
+
+MÉTODO 2 - COPIAR DESDE EL EDITOR
+===================================
+1. Haz clic en el botón "Editor" (lado derecho de la pantalla)
+2. Navega a la carpeta "contracts"
+3. Haz clic en "AmigosDeTronFixed.sol"
+4. Selecciona todo el código (Ctrl+A o Cmd+A)
+5. Copia (Ctrl+C o Cmd+C)
+6. Pega en un archivo nuevo en tu computadora
+
+ARCHIVOS PRINCIPALES QUE DEBES DESCARGAR:
+==========================================
+1. contracts/AmigosDeTronFixed.sol - Smart contract principal (668 líneas)
+2. contracts/README.md - Instrucciones de deployment
+3. src/pages/Dashboard.tsx - Panel de usuario
+4. src/pages/Admin.tsx - Panel de administrador
+5. src/pages/Index.tsx - Página principal
+6. src/lib/contractInteraction.ts - Funciones de interacción
+
+CONTENIDO DEL SMART CONTRACT:
+==============================
+- Sistema de matriz 2x2
+- 3 planes: Básico (50 TRX), Master (100 TRX), Premium (200 TRX)
+- Renovación automática cada 5 ciclos (Básico) o 10 ciclos (Master/Premium)
+- Distribución de pagos en cada ciclo:
+  * 10 TRX al usuario (o al contrato en renovación)
+  * 2.5 TRX al patrocinador
+  * 5 TRX para reinversión
+  * 5.5 TRX quemados
+  * 2 TRX reserva de gas
+  * 25 TRX para reposicionamiento
+
+SI NADA FUNCIONA:
+=================
+Responde "MUÉSTRAME EL CÓDIGO" y te mostraré el smart contract completo
+aquí mismo para que lo copies directamente.
+
+===============================================
