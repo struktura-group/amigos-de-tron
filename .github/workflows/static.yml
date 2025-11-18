@@ -32,18 +32,18 @@ jobs:
       - name: Checkout (Autenticación Corregida)
         uses: actions/checkout@v4
         with:
-          # SOLUCIÓN DE AUTENTICACIÓN: Usa el token interno para evitar el error 128
+          # SOLUCIÓN DE AUTENTICACIÓN
           token: ${{ secrets.GITHUB_TOKEN }} 
       - name: Setup Pages (FIX: Habilitar Pages) 
         uses: actions/configure-pages@v5
         with:
-          # SOLUCIÓN DE PERMISOS: Fuerza la creación/habilitación del sitio (resuelve Not Found)
+          # SOLUCIÓN DE PERMISOS: Fuerza la creación del sitio
           enablement: true 
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           # Upload entire repository
-          path: '.'
-      - name: Deploy to GitHub Pages
+          path: '.' # <--- LINEA 1 QUE FALTABA
+      - name: Deploy to GitHub Pages # <--- LINEA 2 QUE FALTABA
         id: deployment
         uses: actions/deploy-pages@v4
