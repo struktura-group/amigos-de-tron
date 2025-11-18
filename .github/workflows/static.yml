@@ -29,10 +29,11 @@ jobs:
       url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout (FIX: FORZAR TOKEN) # <--- AQUI ESTÁ EL CAMBIO CRÍTICO
+      - name: Checkout (Autenticación Corregida)
         uses: actions/checkout@v4
         with:
-          token: ${{ secrets.GITHUB_TOKEN }} # <--- ESTO RESUELVE EL ERROR 128
+          # SOLUCIÓN FINAL: Usar el token interno para evitar el error 128 y fallos de conexión.
+          token: ${{ secrets.GITHUB_TOKEN }} 
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
