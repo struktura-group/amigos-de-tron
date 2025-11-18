@@ -28,21 +28,21 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }} 
       
-      # 2. Configuración de Node.js
+      # 2. Configuración de Node.js (FIX: Usar working-directory)
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
           node-version: '20' 
-          # FIX CRÍTICO: Indica a setup-node dónde está package.json
-          cache-dependency-path: 'shadcn-ui/package.json' 
+          # Indica a setup-node dónde está package.json (Relativo a la raíz)
+          cache-dependency-path: 'workspace/shadcn-ui/package.json' 
       
-      # 3. Instalación de dependencias y Build (CRÍTICO: Cambia de Directorio)
+      # 3. Instalación de dependencias y Build (CRÍTICO: Usa el nuevo working-directory)
       - name: Install dependencies and Build
+        # Nuevo parámetro que establece el directorio base para este paso
+        working-directory: './workspace/shadcn-ui' # <-- FIX CLAVE
         run: |
-          # Navega a la carpeta donde está package.json
-          cd shadcn-ui 
           npm install 
-          npm run build # <-- Esto crea la carpeta 'dist' dentro de shadcn-ui
+          npm run build # <-- Esto crea la carpeta 'dist' dentro de './workspace/shadcn-ui'
           
       # 4. Setup Pages
       - name: Setup Pages
@@ -50,12 +50,12 @@ jobs:
         with:
           enablement: true 
 
-      # 5. Upload artifact (FIX CRÍTICO: Apunta a la carpeta 'dist' DENTRO de shadcn-ui)
+      # 5. Upload artifact (CRÍTICO: Apunta a la nueva carpeta 'dist')
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # La carpeta 'dist' se crea en shadcn-ui
-          path: './shadcn-ui/dist' 
+          # La carpeta 'dist' se creó dentro de la subcarpeta del proyecto
+          path: './workspace/shadcn-ui/dist' 
           
       # 6. Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
