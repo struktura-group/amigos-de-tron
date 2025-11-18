@@ -1,0 +1,10 @@
+$ cd /workspace/shadcn-ui && cat package.json | grep -A 5 "scripts"
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint --quiet ./src",
+    "preview": "vite preview"
+  },
+$ cd /workspace/shadcn-ui && ls -la dist/ 2>/dev/null || echo "No dist folder"
+
+No dist folder

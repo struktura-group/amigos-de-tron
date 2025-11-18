@@ -1,0 +1,33 @@
+$ cd /workspace/shadcn-ui && find src -name "*.tsx" -o -name "*.ts" | grep -E "(Wallet|tronWeb)" | xargs ls -lh
+-rw-r--r-- 1 root root 3.9K Nov 16 11:18 src/components/WalletConnect.tsx
+-rw-r--r-- 1 root root 2.2K Nov 16 13:59 src/components/WalletConnectButton.tsx
+-rw-r--r-- 1 root root 3.8K Nov 16 14:02 src/contexts/WalletContext.tsx
+-rw-r--r-- 1 root root  13K Nov 16 14:02 src/lib/tronWeb.ts
+$ cd /workspace/shadcn-ui && grep -n "WalletConnectButton" src/pages/Index.tsx | head -5
+
+8:import WalletConnectButton from '@/components/WalletConnectButton';
+124:            <WalletConnectButton />
+146:            <WalletConnectButton />
+$ cd /workspace/shadcn-ui && grep -n "import.*Wallet" src/App.tsx
+
+6:import { WalletProvider } from '@/contexts/WalletContext';
+$ cd /workspace/shadcn-ui && pnpm run build
+
+
+> shadcnui@ build /workspace/shadcn-ui
+> vite build
+
+vite v5.4.19 building for production...
+transforming...
+✓ 2435 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     1.02 kB │ gzip:   0.51 kB
+dist/assets/index-C2nU7Vwq.css     69.64 kB │ gzip:  11.89 kB
+dist/assets/index-BnQ9JqwW.js   1,338.10 kB │ gzip: 368.84 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 9.68s

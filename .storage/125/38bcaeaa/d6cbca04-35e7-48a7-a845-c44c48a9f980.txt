@@ -1,0 +1,25 @@
+$ cd /workspace/shadcn-ui && cat package.json | grep -A 5 "scripts"
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "lint": "eslint --quiet ./src",
+    "preview": "vite preview"
+  },
+$ cd /workspace/shadcn-ui && ls -la dist/ 2>/dev/null || echo "No dist folder"
+
+No dist folder
+$ cd /workspace/shadcn-ui && pnpm run build
+
+
+> shadcnui@ build /workspace/shadcn-ui
+> vite build
+
+vite v5.4.19 building for production...
+transforming...
+✓ 1728 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                   1.02 kB │ gzip:   0.51 kB
+dist/assets/index-B_lB6i_a.css   68.71 kB │ gzip:  11.83 kB
+dist/assets/index-DvRXppTe.js   445.86 kB │ gzip: 135.75 kB
+✓ built in 5.67s

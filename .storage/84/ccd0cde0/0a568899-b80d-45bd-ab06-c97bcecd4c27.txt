@@ -1,0 +1,1 @@
+$ cd /workspace/shadcn-ui && mkdir -p contracts/detailed

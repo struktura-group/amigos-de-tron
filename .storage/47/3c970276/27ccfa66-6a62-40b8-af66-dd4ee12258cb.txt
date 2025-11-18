@@ -1,0 +1,91 @@
+$ cd /workspace/shadcn-ui && pnpm add tronweb
+Progress: resolved 1, reused 0, downloaded 0, added 0
+Progress: resolved 1, reused 1, downloaded 0, added 0
+Progress: resolved 109, reused 108, downloaded 0, added 0
+Progress: resolved 404, reused 402, downloaded 1, added 0
+Progress: resolved 487, reused 410, downloaded 8, added 0
+Progress: resolved 540, reused 423, downloaded 26, added 0
+ WARN  1 deprecated subdependencies found: rollup-plugin-terser@7.0.2
+Packages: +44
+++++++++++++++++++++++++++++++++++++++++++++
+Progress: resolved 545, reused 427, downloaded 43, added 0
+Progress: resolved 545, reused 427, downloaded 43, added 30
+Progress: resolved 545, reused 427, downloaded 43, added 41
+Progress: resolved 545, reused 427, downloaded 44, added 43
+Progress: resolved 545, reused 427, downloaded 44, added 44
+Progress: resolved 545, reused 427, downloaded 44, added 44, done
+
+dependencies:
++ tronweb 6.1.0
+
+Done in 13.3s
+$ cd /workspace/shadcn-ui && pnpm add tronweb
+
+Progress: resolved 0, reused 1, downloaded 0, added 0
+Progress: resolved 76, reused 76, downloaded 0, added 0
+Progress: resolved 408, reused 395, downloaded 0, added 0
+ WARN  1 deprecated subdependencies found: rollup-plugin-terser@7.0.2
+Already up to date
+Progress: resolved 545, reused 471, downloaded 0, added 0, done
+
+Done in 5.2s
+$ cd /workspace/shadcn-ui && pnpm run lint
+
+
+> shadcnui@ lint /workspace/shadcn-ui
+> eslint --quiet ./src
+
+
+/workspace/shadcn-ui/src/contexts/WalletContext.tsx
+   70:21  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  107:53  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  108:18  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  108:65  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/workspace/shadcn-ui/src/lib/tronWeb.ts
+  129:14  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  132:51  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  134:26  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  152:56  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  162:33  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  218:69  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  233:61  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  254:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  275:12  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  290:62  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  313:51  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  351:27  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+  359:59  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+/workspace/shadcn-ui/src/pages/Index.tsx
+  61:21  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+✖ 18 problems (18 errors, 0 warnings)
+
+ ELIFECYCLE  Command failed with exit code 1.
+$ cd /workspace/shadcn-ui && pnpm run lint
+
+
+> shadcnui@ lint /workspace/shadcn-ui
+> eslint --quiet ./src
+
+$ cd /workspace/shadcn-ui && pnpm run build
+
+
+> shadcnui@ build /workspace/shadcn-ui
+> vite build
+
+vite v5.4.19 building for production...
+transforming...
+✓ 2435 modules transformed.
+rendering chunks...
+computing gzip size...
+dist/index.html                     1.02 kB │ gzip:   0.51 kB
+dist/assets/index-C2nU7Vwq.css     69.64 kB │ gzip:  11.89 kB
+dist/assets/index-BnQ9JqwW.js   1,338.10 kB │ gzip: 368.84 kB
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+✓ built in 9.03s
