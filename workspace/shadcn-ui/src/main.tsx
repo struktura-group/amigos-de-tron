@@ -1,15 +1,20 @@
-import React from 'react'; // <-- Importación necesaria para usar JSX (la sintaxis <.../>)
+import React from 'react';
 import { createRoot } from 'react-dom/client';
-// 1. Importar HashRouter desde react-router-dom
 import { HashRouter } from 'react-router-dom';
-import App from './App.tsx';
+import App from './App';
 import './index.css';
 
-createRoot(document.getElementById('root')!).render(
-  <React.StrictMode> 
-    // 2. Envolver el componente App con HashRouter 
+const root = document.getElementById('root');
+
+if (!root) throw new Error("No se encontró el elemento #root en index.html");
+
+createRoot(root).render(
+  <React.StrictMode>
     <HashRouter>
       <App />
     </HashRouter>
   </React.StrictMode>
 );
+
+
+ 
