@@ -1,5 +1,4 @@
-# Simple workflow for deploying static content (React/Vite build) to GitHub Pages
-name: Deploy static content to Pages
+o=name: Deploy static content to Pages
 
 on:
   push:
@@ -17,47 +16,42 @@ concurrency:
 
 jobs:
   deploy:
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
     runs-on: ubuntu-latest
+
     steps:
-      # 1. Checkout
-      - name: Checkout Code
+      # 1️⃣ Checkout code
+      - name: Checkout
         uses: actions/checkout@v4
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }} 
-      
-      # 2. Configuración de Node.js (FIX: Usar working-directory)
+
+      # 2️⃣ Setup Node 20
       - name: Setup Node
         uses: actions/setup-node@v4
         with:
-          node-version: '20' 
-          # Indica a setup-node dónde está package.json (Relativo a la raíz)
-          cache-dependency-path: 'workspace/shadcn-ui/package.json' 
-      
-      # 3. Instalación de dependencias y Build (CRÍTICO: Usa el nuevo working-directory)
-      - name: Install dependencies and Build
-        # Nuevo parámetro que establece el directorio base para este paso
-        working-directory: './workspace/shadcn-ui' # <-- FIX CLAVE
-        run: |
-          npm install 
-          npm run build # <-- Esto crea la carpeta 'dist' dentro de './workspace/shadcn-ui'
-          
-      # 4. Setup Pages
+          node-version: 20
+
+      # 3️⃣ Install dependencies en la carpeta correcta
+      - name: Install dependencies
+        working-directory: ./workspace/shadcn-ui
+        run: npm install
+
+      # 4️⃣ Build del proyecto
+      - name: Build
+        working-directory: ./workspace/shadcn-ui
+        run: npm run build
+
+      # 5️⃣ Setup Pages
       - name: Setup Pages
         uses: actions/configure-pages@v5
         with:
-          enablement: true 
+          enablement: true
 
-      # 5. Upload artifact (CRÍTICO: Apunta a la nueva carpeta 'dist')
+      # 6️⃣ Upload artifact (dist generado dentro de shadcn-ui)
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          # La carpeta 'dist' se creó dentro de la subcarpeta del proyecto
-          path: './workspace/shadcn-ui/dist' 
-          
-      # 6. Deploy to GitHub Pages
+          path: ./workspace/shadcn-ui/dist
+
+      # 7️⃣ Deploy to GitHub Pages
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
